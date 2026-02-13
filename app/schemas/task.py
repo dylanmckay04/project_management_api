@@ -40,5 +40,6 @@ class TaskReadDetailed(TaskRead):
     assigned_user: Optional["UserRead"] = None
 
 
+# Avoid circular import
 from .user import UserRead
 TaskReadDetailed.model_rebuild()

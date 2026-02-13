@@ -30,6 +30,6 @@ class UserRead(UserBase):
 class UserReadWithProjects(UserRead):
     projects: List["ProjectRead"] = []
 
-
+# Avoid circular import
 from .project import ProjectRead
 UserReadWithProjects.model_rebuild()

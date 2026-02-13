@@ -36,6 +36,7 @@ class ProjectReadDetailed(ProjectRead):
     tasks: List["TaskRead"] = []
 
 
+# Avoid circular import
 from .user import UserRead
 from .task import TaskRead
 ProjectReadWithTasks.model_rebuild()
