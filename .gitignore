@@ -1,0 +1,12 @@
+# Virtual Environments
+.env
+.venv
+
+# Python Bytecode
+*.pyc
+__pycache__
+
+# Logs and DB
+*.sqlite
+*.log
+
