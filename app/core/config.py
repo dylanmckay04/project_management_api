@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     
     database_uri: str = "sqlite:///./test.db"
     
-    secret_key: str = "secret-key-change-later"
+    secret_key: str = "your-super-secret-key-change-in-production"
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
     

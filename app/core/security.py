@@ -4,7 +4,7 @@ from jose import JWTError, jwt
 from typing import Optional
 from app.core.config import get_settings
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["bcrypt"])
 
 def hash_password(password: str) -> str:
     """Hash password using bcrypt"""
