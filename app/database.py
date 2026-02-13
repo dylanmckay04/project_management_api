@@ -1,11 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-import os
+from app.core.config import get_settings
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+settings = get_settings()
+DATABASE_URI = settings.database_uri
 
 engine = create_engine(
-    DATABASE_URL,
+    DATABASE_URI,
     connect_args={"check_same_thread": False}
 )
 
