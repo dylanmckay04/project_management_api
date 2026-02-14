@@ -5,6 +5,7 @@
 # Python Bytecode
 *.pyc
 __pycache__
+.pytest_cache
 
 # Logs and DB
 *.sqlite

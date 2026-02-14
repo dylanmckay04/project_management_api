@@ -1,13 +1,13 @@
 from passlib.context import CryptContext
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
 from typing import Optional
 from app.core.config import get_settings
 
-pwd_context = CryptContext(schemes=["bcrypt"])
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"])
 
 def hash_password(password: str) -> str:
-    """Hash password using bcrypt"""
+    """Hash password using pbkdf2_sha256"""
     return pwd_context.hash(password)
 
 
@@ -31,11 +31,11 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     settings = get_settings()
     
     if expires_delta:
-        expire = datetime.now() + expires_delta
+        expire = datetime.now(timezone.utc) + expires_delta
     else:
-        expire = datetime.now() + timedelta(minutes=settings.access_token_expire_minutes)
+        expire = datetime.now(timezone.utc) + timedelta(minutes=settings.access_token_expire_minutes)
     
-    to_encode.update({"exp": expire})
+    to_encode.update({"exp": int(expire.timestamp())})
     encoded_jwt = jwt.encode(
         to_encode,
         settings.secret_key,

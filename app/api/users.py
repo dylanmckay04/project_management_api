@@ -62,14 +62,14 @@ async def login(email: str, password: str, db: Session = Depends(get_db)):
     
     access_token_expires = timedelta(minutes=30)
     access_token = create_access_token(
-        data={"sub": user.id},
+        data={"sub": str(user.id)},
         expires_delta=access_token_expires
     )
     
     return {
-        "access token": access_token,
+        "access_token": access_token,
         "token_type": "bearer",
-        "user": UserRead.model_validate(db)
+        "user": UserRead.model_validate(user)
     }
 
 
