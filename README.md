@@ -141,7 +141,7 @@ Project (1) ──< (Many) Task
 #### 1. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/project_management_api.git
+git clone https://github.com/dylanmckay04/project_management_api.git
 cd project_management_api
 ```
 
