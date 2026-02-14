@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import Optional
 from app.models import TaskStatus, TaskPriority
@@ -8,6 +8,8 @@ class TaskBase(BaseModel):
     description: Optional[str] = None
     priority: TaskPriority = TaskPriority.MEDIUM
     due_date: Optional[datetime] = None
+    
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TaskCreate(TaskBase):

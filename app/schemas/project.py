@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import Optional, List
 
@@ -6,6 +6,8 @@ from typing import Optional, List
 class ProjectBase(BaseModel):
     name: str
     description: Optional[str] = None
+    
+    model_config = ConfigDict(from_attributes=True)
 
 
 class ProjectCreate(ProjectBase):
