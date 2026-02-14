@@ -421,7 +421,7 @@ This API is deployed on **Railway** with:
 
 ### Implemented
 
-- Password hashing with pbkdf2_sha256
+- ✅ Password hashing with pbkdf2_sha256
 - ✅ JWT token-based authentication
 - ✅ Bearer token extraction and validation
 - ✅ Ownership-based authorization
