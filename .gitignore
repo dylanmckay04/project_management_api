@@ -9,4 +9,4 @@ __pycache__
 # Logs and DB
 *.sqlite
 *.log
-
+*.db
