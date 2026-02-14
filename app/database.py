@@ -3,10 +3,10 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 from app.core.config import get_settings
 
 settings = get_settings()
-DATABASE_URI = settings.database_uri
+DATABASE_URL = settings.database_url
 
 engine = create_engine(
-    DATABASE_URI,
+    DATABASE_URL,
     connect_args={"check_same_thread": False}
 )
 

@@ -5,7 +5,7 @@ from functools import lru_cache
 class Settings(BaseSettings):
     app_name: str = "Project Management API"
     
-    database_uri: str = "sqlite:///./test.db"
+    database_url: str = "sqlite:///./test.db"
     
     secret_key: str = "your-super-secret-key-change-in-production"
     algorithm: str = "HS256"

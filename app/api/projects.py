@@ -4,7 +4,7 @@ from typing import List
 from app.database import get_db
 from app.models import User, Project
 from app.schemas import ProjectCreate, ProjectRead, ProjectUpdate, ProjectReadDetailed
-from app.core import get_current_user
+from app.core.dependencies import get_current_user
 
 router = APIRouter(prefix="/projects", tags=["projects"])
 

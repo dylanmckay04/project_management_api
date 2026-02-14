@@ -4,7 +4,7 @@ from typing import List
 from app.database import get_db
 from app.models import User, Project, Task
 from app.schemas import TaskCreate, TaskRead, TaskUpdate, TaskReadDetailed
-from app.core import get_current_user
+from app.core.dependencies import get_current_user
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
