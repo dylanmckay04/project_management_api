@@ -38,7 +38,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     to_encode.update({"exp": int(expire.timestamp())})
     encoded_jwt = jwt.encode(
         to_encode,
-        settings.secret_key,
+        settings.secret_key.get_secret_value(),
         algorithm=settings.algorithm
     )
     return encoded_jwt
@@ -58,7 +58,7 @@ def decode_token(token: str) -> Optional[dict]:
     try:
         payload = jwt.decode(
             token,
-            settings.secret_key,
+            settings.secret_key.get_secret_value(),
             algorithms=[settings.algorithm]
         )
         return payload

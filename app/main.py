@@ -2,6 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import users_router, projects_router, tasks_router
 from app.database import Base, engine
+from app.core.config import validate_settings
+
+validate_settings()
 
 Base.metadata.create_all(bind=engine)
 
