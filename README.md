@@ -1,6 +1,6 @@
 # Project Management API
 
-A REST API for managing projects and tasks, built with FastAPI and PostgreSQL. This API includes modern RESTful design and secure authentication.
+A REST API for managing projects and tasks, built with FastAPI and PostgreSQL. This API includes modern RESTful design practices and secure authentication.
 
 **Live Demo:** https://web-production-8f59b.up.railway.app
 
