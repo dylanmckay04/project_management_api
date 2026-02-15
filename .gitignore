@@ -1,7 +1,6 @@
 # Virtual Environments
 .env
 .venv
-.env.example
 
 # Python Bytecode
 *.pyc
