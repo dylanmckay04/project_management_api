@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import api from '../api/axios'
+import { Project } from '../types'
 
 type ProjectFormProps = {
   projectId?: number
   onSuccess: () => void
   onCancel: () => void
-  initialData?: {
-    name: string
-    description?: string
-  }
+  initialData?: Partial<Pick<Project, 'name' | 'description'>>
 }
 
 export default function ProjectForm({ projectId, onSuccess, onCancel, initialData }: ProjectFormProps) {
@@ -25,10 +23,10 @@ export default function ProjectForm({ projectId, onSuccess, onCancel, initialDat
     try {
       if (projectId) {
         // Update
-        await api.put(`/projects/${projectId}`, { name, description })
+        await api.put(`/projects/${projectId}`, { name, description } as Partial<Project>)
       } else {
         // Create
-        await api.post('/projects', { name, description })
+        await api.post('/projects', { name, description } as Partial<Project>)
       }
       onSuccess()
     } catch (err: any) {

@@ -1,19 +1,13 @@
 import React, { useState } from 'react'
 import api from '../api/axios'
+import { Task } from '../types'
 
 type TaskFormProps = {
   taskId?: number
   projectId: number
   onSuccess: () => void
   onCancel: () => void
-  initialData?: {
-    title: string
-    description?: string
-    status?: string
-    priority?: string
-    due_date?: string
-    assigned_to?: number | null
-  }
+  initialData?: Partial<Pick<Task, 'title' | 'description' | 'status' | 'priority' | 'due_date' | 'assigned_to'>>
 }
 
 export default function TaskForm({
@@ -38,11 +32,11 @@ export default function TaskForm({
     setLoading(true)
 
     try {
-      const payload = {
+      const payload: Omit<Task, 'id' | 'created_at' | 'updated_at' | 'project_id'> & { project_id: number } = {
         title,
         description,
-        status,
-        priority,
+        status: status as Task['status'],
+        priority: priority as Task['priority'],
         due_date: dueDate || null,
         assigned_to: assignedTo ? parseInt(assignedTo as string) : null,
         project_id: projectId,
@@ -84,7 +78,7 @@ export default function TaskForm({
       </div>
       <div>
         <label>Status</label>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+        <select value={status} onChange={(e) => setStatus(e.target.value as Task['status'])}>
           <option value="todo">To Do</option>
           <option value="in_progress">In Progress</option>
           <option value="completed">Completed</option>
@@ -92,7 +86,7 @@ export default function TaskForm({
       </div>
       <div>
         <label>Priority</label>
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+        <select value={priority} onChange={(e) => setPriority(e.target.value as Task['priority'])}>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>

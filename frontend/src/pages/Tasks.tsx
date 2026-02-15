@@ -2,16 +2,18 @@ import { useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import api from '../api/axios'
 import { Link } from 'react-router-dom'
-import TaskForm from '../components/TaskForm'
 
-async function fetchTasks(projectId?: number) {
+import TaskForm from '../components/TaskForm'
+import { Project, Task } from '../types'
+
+async function fetchTasks(projectId?: number): Promise<Task[]> {
   const params = projectId ? { project_id: projectId } : {}
-  const resp = await api.get('/tasks', { params })
+  const resp = await api.get<Task[]>('/tasks', { params })
   return resp.data
 }
 
-async function fetchProjects() {
-  const resp = await api.get('/projects')
+async function fetchProjects(): Promise<Project[]> {
+  const resp = await api.get<Project[]>('/projects')
   return resp.data
 }
 
@@ -21,12 +23,12 @@ export default function Tasks() {
   const [deleteError, setDeleteError] = useState<string | null>(null)
   const queryClient = useQueryClient()
 
-  const { data: projects, isLoading: projectsLoading } = useQuery({
+  const { data: projects, isLoading: projectsLoading } = useQuery<Project[]>({
     queryKey: ['projects'],
     queryFn: fetchProjects,
   })
 
-  const { data: tasks, isLoading: tasksLoading, error } = useQuery({
+  const { data: tasks, isLoading: tasksLoading, error } = useQuery<Task[]>({
     queryKey: ['tasks', selectedProjectId],
     queryFn: () => fetchTasks(selectedProjectId || undefined),
   })
@@ -69,7 +71,7 @@ export default function Tasks() {
           onChange={(e) => setSelectedProjectId(e.target.value ? parseInt(e.target.value) : null)}
         >
           <option value="">All Tasks</option>
-          {(projects || []).map((p: any) => (
+          {(projects || []).map((p) => (
             <option key={p.id} value={p.id}>
               {p.name}
             </option>
@@ -93,7 +95,7 @@ export default function Tasks() {
       {deleteError && <p className="error">{deleteError}</p>}
 
       <ul className="task-list">
-        {(tasks || []).map((t: any) => (
+        {(tasks || []).map((t) => (
           <li key={t.id} className="task-item">
             <div>
               <Link to={`/tasks/${t.id}`}>{t.title || `Task ${t.id}`}</Link>

@@ -1,12 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import api from '../api/axios'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-
-type User = Record<string, any> | null
+import { User } from '../types'
 
 type AuthContextType = {
   token: string | null
-  user: User
+  user: User | null
   isLoadingUser: boolean
   login: (token: string) => void
   logout: () => void
@@ -41,10 +40,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [token, queryClient])
 
-  const { data: user, isLoading, refetch } = useQuery({
+  const { data: user, isLoading, refetch } = useQuery<User>({
     queryKey: ['me'],
     queryFn: async () => {
-      const resp = await api.get('/users/me')
+      const resp = await api.get<User>('/users/me')
       return resp.data
     },
     enabled: Boolean(token),
