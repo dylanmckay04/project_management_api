@@ -1,0 +1,47 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.env.local
+
+# Testing
+.pytest_cache/
+test.db
+*.db
+
+# Build outputs
+dist/
+build/
+.vite
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Tests
+tests/
+**/*.test.tsx
+**/*.test.ts
+vitest.config.ts
+
+# Documentation
+docs/
+README.md

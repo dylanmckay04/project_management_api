@@ -15,6 +15,7 @@ A REST API for managing projects and tasks, built with FastAPI and PostgreSQL. T
 - [API Documentation](#api-documentation)
 - [Project Structure](#project-structure)
 - [Development](#development)
+- [Docker Deployment](#docker-deployment)
 - [Deployment](#deployment)
 - [Future Improvements](#future-improvements)
 
@@ -402,6 +403,118 @@ pytest tests/test_api.py::test_full_flow -v
 # Run with coverage
 pytest --cov=app tests/
 ```
+
+---
+
+## Docker Deployment
+
+### Overview
+
+The application is fully containerized using Docker Compose, which orchestrates three services:
+- **Backend**: FastAPI application running on port 8000
+- **Frontend**: React application served by Nginx on port 80
+- **Database**: PostgreSQL 16 on port 5432
+
+### Quick Start
+
+1. **Build and run services**:
+```bash
+docker-compose up -d
+```
+
+2. **Access the application**:
+   - Frontend: http://localhost:3000
+   - API: http://localhost:8000
+   - API Docs: http://localhost:8000/docs
+
+3. **View logs**:
+```bash
+docker-compose logs -f
+```
+
+### Docker Images
+
+**Backend** (`Dockerfile.backend`):
+- Uses `python:3.11-slim` base image
+- Installs dependencies from `requirements.txt`
+- Runs Alembic migrations on startup
+- Exposes port 8000 for FastAPI
+
+**Frontend** (`Dockerfile.frontend`):
+- Multi-stage build for optimization
+- Node 20-alpine for building React app
+- nginx:alpine for serving static files
+- Includes SPA routing and API proxy configuration
+
+### Environment Configuration
+
+Create a `.env` file (template provided in `.env.example`):
+
+```env
+# Database
+DB_USER=admin
+DB_PASSWORD=secure_password_123
+DB_NAME=project_management
+
+# Application
+ENVIRONMENT=development
+SECRET_KEY=your-secret-key-here
+```
+
+### Common Commands
+
+```bash
+# Start services
+docker-compose up -d
+
+# Stop services
+docker-compose down
+
+# View logs
+docker-compose logs -f backend
+docker-compose logs -f frontend
+docker-compose logs -f postgres
+
+# Rebuild services
+docker-compose build
+
+# Run migrations
+docker-compose exec backend alembic upgrade head
+
+# Access PostgreSQL shell
+docker-compose exec postgres psql -U admin -d project_management
+```
+
+### Production Deployment
+
+For production, follow the guidance in [DOCKER.md](./DOCKER.md) which includes:
+- Environment-specific configurations
+- Health checks and monitoring
+- Container registry setup
+- CI/CD pipeline examples
+- Troubleshooting guide
+
+### Troubleshooting
+
+**Port already in use**:
+```bash
+# Check what's using port 80/8000
+lsof -i :80
+lsof -i :8000
+
+# Use different ports
+docker-compose -f docker-compose.yml up -d -p 3001:80
+```
+
+**Database connection failed**:
+- Ensure `.env` has correct DB_USER and DB_PASSWORD
+- Wait 10-15 seconds for PostgreSQL to be ready
+- Check logs: `docker-compose logs postgres`
+
+**Frontend can't reach backend**:
+- Verify backend container is running: `docker-compose ps`
+- Frontend uses `http://backend:8000` internally
+- Public requests use `http://localhost:8000` (Nginx proxy)
 
 ---
 
