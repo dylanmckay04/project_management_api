@@ -73,6 +73,16 @@ async def list_tasks(
     - **skip**: Number of taks to skip (for pagination)
     - **limit**: Maximum number of tasks to return
     """
+    from app.models.task import TaskStatus
+    
+    if status:
+        valid_statuses = [s.value for s in TaskStatus]
+        if status not in valid_statuses:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Invalid status. Must be one of: {', '.join(valid_statuses)}"
+            )
+    
     query = db.query(Task).join(Project).filter(Project.owner_id == current_user.id)
     
     if project_id:
