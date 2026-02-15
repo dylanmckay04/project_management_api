@@ -6,8 +6,6 @@ from app.core.config import validate_settings
 
 validate_settings()
 
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI(
     title="Project Management API",
     description="A professional project management API with user authentication",
