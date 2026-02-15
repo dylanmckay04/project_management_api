@@ -1,6 +1,7 @@
 # Virtual Environments
 .env
 .venv
+.env.example
 
 # Python Bytecode
 *.pyc
@@ -12,3 +13,6 @@ __pycache__
 *.log
 *.db
 .DS_Store
+
+# Frontend Files
+node_modules
