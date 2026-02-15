@@ -6,6 +6,7 @@ import Projects from "./pages/Projects"
 import Project from "./pages/Project"
 import Tasks from './pages/Tasks'
 import Task from './pages/Task'
+import Profile from './pages/Profile'
 import { useAuth } from './auth/AuthProvider'
 
 function Protected({ children }: { children: JSX.Element }) {
@@ -35,6 +36,7 @@ export default function App() {
         path="/tasks/:id"
         element={<Protected><Task /></Protected>}
       />
+      <Route path="/me" element={<Protected><Profile /></Protected>} />
       <Route path="/" element={<Navigate to="/projects" replace />} />
     </Routes>
   )

@@ -50,3 +50,14 @@ button:disabled{background-color:#6c757d;cursor:not-allowed}
 .status-badge[data-status="todo"]{background-color:#e2e3e5;color:#383d41}
 .status-badge[data-status="in_progress"]{background-color:#fff3cd;color:#856404}
 .status-badge[data-status="completed"]{background-color:#d4edda;color:#155724}
+
+/* App header */
+.app-header{background:#fafafa;border-bottom:1px solid #eee;padding:10px 0;margin-bottom:20px}
+.header-inner{display:flex;justify-content:space-between;align-items:center}
+.nav-links{display:flex;gap:12px}
+.nav-links a{color:#007bff;text-decoration:none}
+.nav-links a:hover{text-decoration:underline}
+.header-right{display:flex;align-items:center;gap:12px}
+.user-name{color:#333;text-decoration:none;font-weight:600}
+.link-btn{background:transparent;border:none;color:#007bff;cursor:pointer;padding:0}
+.link-btn:hover{color:#e7f2fd}
