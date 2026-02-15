@@ -14,7 +14,7 @@ export default function Header() {
         </nav>
         <div className="header-right">
           {token && isLoadingUser && (
-            <span className="header-spinner" aria-hidden="true"></span>
+            <span className="header-spinner" data-testid="loading-spinner" aria-hidden="true"></span>
           )}
           {user ? (
             <>
