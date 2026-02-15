@@ -212,28 +212,28 @@ def test_task_filtering_by_status():
     assert r.status_code == 201
     
     # Test filtering by todo status
-    r = client.get("/tasks/?status=todo", headers=headers)
+    r = client.get("/tasks/?task_status=todo", headers=headers)
     assert r.status_code == 200
     tasks = r.json()
     assert all(t["status"] == "todo" for t in tasks)
     assert any(t["title"] == "Todo Task" for t in tasks)
     
     # Test filtering by in_progress status
-    r = client.get("/tasks/?status=in_progress", headers=headers)
+    r = client.get("/tasks/?task_status=in_progress", headers=headers)
     assert r.status_code == 200
     tasks = r.json()
     assert all(t["status"] == "in_progress" for t in tasks)
     assert any(t["title"] == "In Progress Task" for t in tasks)
     
     # Test filtering by completed status
-    r = client.get("/tasks/?status=completed", headers=headers)
+    r = client.get("/tasks/?task_status=completed", headers=headers)
     assert r.status_code == 200
     tasks = r.json()
     assert all(t["status"] == "completed" for t in tasks)
     assert any(t["title"] == "Completed Task" for t in tasks)
     
     # Test invalid status returns error
-    r = client.get("/tasks/?status=invalid_status", headers=headers)
+    r = client.get("/tasks/?task_status=invalid_status", headers=headers)
     assert r.status_code == 400
     assert "Invalid status" in r.json()["detail"]
 

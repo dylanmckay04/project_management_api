@@ -47,6 +47,7 @@ async def create_task(
         project_id=task.project_id,
         assigned_to=task.assigned_to,
         priority=task.priority,
+        status=task.status,
         due_date=task.due_date
     )
     db.add(db_task)
@@ -61,7 +62,7 @@ async def list_tasks(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
     project_id: int = None,
-    status: str = None,
+    task_status: str = None,
     skip: int = 0,
     limit: int = 10
 ):
@@ -69,15 +70,15 @@ async def list_tasks(
     List tasks with filtering
     
     - **project_id**: Filter by project ID
-    - **status**: Filter by status (todo, in_progress, completed)
+    - **task_status**: Filter by status (todo, in_progress, completed)
     - **skip**: Number of taks to skip (for pagination)
     - **limit**: Maximum number of tasks to return
     """
     from app.models.task import TaskStatus
     
-    if status:
+    if task_status:
         valid_statuses = [s.value for s in TaskStatus]
-        if status not in valid_statuses:
+        if task_status not in valid_statuses:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Invalid status. Must be one of: {', '.join(valid_statuses)}"
@@ -88,8 +89,8 @@ async def list_tasks(
     if project_id:
         query = query.filter(Task.project_id == project_id)
     
-    if status:
-        query = query.filter(Task.status == status)
+    if task_status:
+        query = query.filter(Task.status == task_status)
     
     tasks = query.offset(skip).limit(limit).all()
     

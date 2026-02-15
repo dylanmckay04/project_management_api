@@ -15,6 +15,7 @@ class TaskBase(BaseModel):
 class TaskCreate(TaskBase):
     project_id: int
     assigned_to: Optional[int] = None
+    status: Optional[TaskStatus] = None
 
 
 class TaskUpdate(BaseModel):
