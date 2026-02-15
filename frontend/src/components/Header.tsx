@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../auth/AuthProvider'
 
 export default function Header() {
-  const { token, logout, user } = useAuth()
+  const { token, logout, user, isLoadingUser } = useAuth()
 
   return (
     <header className="app-header">
@@ -13,6 +13,9 @@ export default function Header() {
           <Link to="/tasks">Tasks</Link>
         </nav>
         <div className="header-right">
+          {token && isLoadingUser && (
+            <span className="header-spinner" aria-hidden="true"></span>
+          )}
           {user ? (
             <>
               <Link to="/me" className="user-name">{user.full_name || user.email}</Link>
