@@ -39,7 +39,6 @@ This frontend application provides a comprehensive interface for managing projec
 
 ### User Experience
 - Persistent navigation header with user info display
-- Loading spinner during async operations
 - Error handling and user feedback
 - Modal dialogs for creating/editing resources
 - Clean, responsive UI that works on multiple screen sizes
@@ -110,7 +109,7 @@ Start the development server with hot module replacement:
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+The application will be available at `http://localhost:3000`
 
 ### Building for Production
 
@@ -221,7 +220,7 @@ The frontend communicates with a FastAPI backend. Key endpoints used:
 **Issue: API requests failing with 401 Unauthorized**
 - Solution: Ensure you're logged in and the backend server is running on port 8000
 
-**Issue: Port 5173 already in use**
+**Issue: Port 3000 already in use**
 - Solution: The dev server will use the next available port automatically, or stop other processes using the port
 
 **Issue: Stale data in the UI**

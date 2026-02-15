@@ -6,7 +6,7 @@ A REST API for managing projects and tasks, built with FastAPI and PostgreSQL. T
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -20,7 +20,7 @@ A REST API for managing projects and tasks, built with FastAPI and PostgreSQL. T
 
 ---
 
-## ✨ Features
+## Features
 
 ### Core Functionality
 - **User Management**: Registration, authentication, profile management
@@ -42,7 +42,7 @@ A REST API for managing projects and tasks, built with FastAPI and PostgreSQL. T
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Component | Technology | Version |
 |-----------|-----------|---------|
@@ -58,7 +58,7 @@ A REST API for managing projects and tasks, built with FastAPI and PostgreSQL. T
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ### Layered Design
 
@@ -128,7 +128,7 @@ Project (1) ──< (Many) Task
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -188,7 +188,7 @@ Server runs on: `http://localhost:8000`
 
 ---
 
-## 📚 API Documentation
+## API Documentation
 
 ### Base URL
 
@@ -307,7 +307,7 @@ Visit https://web-production-8f59b.up.railway.app/docs to test all endpoints int
 
 ---
 
-## 📁 Project Structure Details
+## Project Structure Details
 
 ### Models (`app/models/`)
 
@@ -375,7 +375,7 @@ FastAPI APIRouter instances:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Run Tests
 
@@ -405,7 +405,7 @@ pytest --cov=app tests/
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
 ### Live Deployment (Railway)
 
@@ -417,19 +417,19 @@ This API is deployed on **Railway** with:
 
 **URL**: https://web-production-8f59b.up.railway.app
 
-## 🔐 Security Considerations
+## Security Considerations
 
 ### Implemented
 
-- ✅ Password hashing with pbkdf2_sha256
-- ✅ JWT token-based authentication
-- ✅ Bearer token extraction and validation
-- ✅ Ownership-based authorization
-- ✅ Secure config management (SecretStr for secrets)
-- ✅ Environment variable validation at startup
-- ✅ HTTP status codes indicate auth failures (401, 403)
+- Password hashing with pbkdf2_sha256
+- JWT token-based authentication
+- Bearer token extraction and validation
+- Ownership-based authorization
+- Secure config management (SecretStr for secrets)
+- Environment variable validation at startup
+- HTTP status codes indicate auth failures (401, 403)
 
-## 📊 Database Schema
+## Database Schema
 
 ### Users Table
 
@@ -477,7 +477,7 @@ CREATE TABLE tasks (
 
 ---
 
-## 📈 Performance & Scaling
+## Performance & Scaling
 
 ### Current Performance
 
@@ -494,7 +494,7 @@ CREATE TABLE tasks (
 
 ---
 
-## 🔜 Future Improvements
+## Future Improvements
 
 ### High Priority
 
@@ -523,19 +523,19 @@ CREATE TABLE tasks (
 
 ---
 
-## 📝 License
+## License
 
-This project is open source and available under the MIT License.
+This project is part of a portfolio and can be used as a reference for learning FastAPI, Python, and modern API development practices.
 
 ---
 
-## 👤 Author
+## Author
 
 Built as a portfolio project by Dylan McKay, demonstrating full-stack API development with modern technologies.
 
 ---
 
-## 📧 Support
+## Support
 
 For issues or questions:
 1. Check existing GitHub issues
