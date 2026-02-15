@@ -3,5 +3,36 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.4;p
 .container{max-width:900px;margin:0 auto}
 label{display:block;margin-top:10px}
 input{padding:8px;margin-top:4px;width:100%;box-sizing:border-box}
-button{margin-top:12px;padding:8px 12px}
-.error{color:#b00020}
+textarea{padding:8px;margin-top:4px;width:100%;box-sizing:border-box;font-family:inherit}
+button{margin-top:12px;padding:8px 12px;cursor:pointer;background-color:#007bff;color:white;border:none;border-radius:4px}
+button:hover{background-color:#0056b3}
+button:disabled{background-color:#6c757d;cursor:not-allowed}
+.error{color:#b00020;margin-top:10px}
+
+/* Header and actions */
+.header-actions{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.header-actions h1{margin:0}
+.header-actions button{margin:0}
+.actions{display:flex;gap:10px}
+
+/* Modal */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
+.modal{background-color:white;padding:30px;border-radius:8px;max-width:500px;width:90%;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
+.modal h2{margin-top:0}
+
+/* Form */
+.form{display:flex;flex-direction:column}
+.form-actions{display:flex;gap:10px;margin-top:20px}
+.form-actions button{margin:0}
+.form-actions button:last-child{background-color:#6c757d}
+.form-actions button:last-child:hover{background-color:#5a6268}
+
+/* Delete button */
+.delete-btn{background-color:#dc3545;margin-left:auto}
+.delete-btn:hover{background-color:#c82333}
+
+/* List styles */
+.project-list{list-style:none;padding:0}
+.project-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #ddd}
+.project-item a{color:#007bff;text-decoration:none}
+.project-item a:hover{text-decoration:underline}
