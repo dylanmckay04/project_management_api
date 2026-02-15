@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ProjectForm from '../components/ProjectForm'
-import axios from '../api/axios'
 
 const { mockPost, mockPut } = vi.hoisted(() => ({
   mockPost: vi.fn(),
