@@ -19,7 +19,8 @@ class Settings(BaseSettings):
     # Password policy
     password_min_length: int = 8
 
-    model_config = ConfigDict(env_file=".env")
+    # Allow extra environment variables (e.g. VITE_ vars from the frontend)
+    model_config = ConfigDict(env_file=".env", extra="ignore")
 
     @property
     def is_production(self) -> bool:
