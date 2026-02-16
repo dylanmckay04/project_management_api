@@ -37,7 +37,7 @@ export default function App() {
         element={<Protected><Task /></Protected>}
       />
       <Route path="/me" element={<Protected><Profile /></Protected>} />
-      <Route path="/" element={<Navigate to="/projects" replace />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>
   )
 }
