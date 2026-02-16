@@ -274,7 +274,7 @@ The frontend is deployed on Vercel:
 3. Set environment variable: `VITE_API_URL=YOUR_API_HOST_URL`
 4. Deployments trigger on push to main branch
 
-**Live URL**: https://pulse-pm.vercel.app
+**Live URL**: https://pulsepm.vercel.app
 
 ### Backend - Railway
 
