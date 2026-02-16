@@ -2,6 +2,8 @@
 
 A modern, type-safe React application for managing projects and tasks with real-time synchronization. Built with React 18, TypeScript, and Vite for optimal performance and developer experience.
 
+**Live Demo:** https://pulsepm.vercel.app/
+
 ## Overview
 
 This frontend application provides a comprehensive interface for managing projects and their associated tasks. It features authentication, CRUD operations for projects and tasks, user profiles, and intuitive UI components with real-time data synchronization through React Query.
