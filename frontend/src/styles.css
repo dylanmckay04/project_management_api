@@ -527,3 +527,173 @@ button:disabled {
   margin-bottom: var(--spacing-lg);
 }
 
+/* ===== Theme Toggle Switch ===== */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs);
+  margin: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: transparent;
+}
+
+.theme-toggle-track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background-color: var(--color-gray-600);
+  border-radius: 12px;
+  border: 2px solid var(--color-gray-500);
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-white);
+  border-radius: 50%;
+  transition: transform 0.2s ease-out;
+}
+
+[data-theme="dark"] .theme-toggle-thumb {
+  transform: translateX(20px);
+}
+
+[data-theme="dark"] .theme-toggle-track {
+  background-color: var(--color-green);
+  border-color: var(--color-green-hover);
+}
+
+.theme-toggle-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ===== Dark Mode Theme ===== */
+[data-theme="dark"] {
+  /* Traffic Light Colors - slightly adjusted for dark mode contrast */
+  --color-green: hsl(145, 63%, 48%);
+  --color-green-hover: hsl(145, 63%, 42%);
+  --color-yellow: hsl(45, 93%, 55%);
+  --color-yellow-hover: hsl(45, 93%, 48%);
+  --color-red: hsl(0, 72%, 58%);
+  --color-red-hover: hsl(0, 72%, 50%);
+
+  /* Neutrals - inverted for dark mode */
+  --color-white: hsl(210, 15%, 12%);
+  --color-gray-50: hsl(210, 15%, 14%);
+  --color-gray-100: hsl(210, 14%, 18%);
+  --color-gray-200: hsl(210, 12%, 24%);
+  --color-gray-300: hsl(210, 10%, 35%);
+  --color-gray-400: hsl(210, 8%, 50%);
+  --color-gray-500: hsl(210, 8%, 60%);
+  --color-gray-600: hsl(210, 10%, 75%);
+  --color-gray-700: hsl(210, 12%, 85%);
+  --color-gray-800: hsl(210, 15%, 92%);
+  --color-gray-900: hsl(210, 20%, 98%);
+
+  /* Semantic */
+  --color-primary: var(--color-green);
+  --color-primary-hover: var(--color-green-hover);
+  --color-warning: var(--color-yellow);
+  --color-warning-hover: var(--color-yellow-hover);
+  --color-danger: var(--color-red);
+  --color-danger-hover: var(--color-red-hover);
+
+  /* Text */
+  --color-text: hsl(210, 20%, 95%);
+  --color-text-muted: hsl(210, 10%, 60%);
+  --color-text-inverse: hsl(210, 15%, 10%);
+
+  /* Backgrounds */
+  --color-bg: hsl(210, 15%, 10%);
+  --color-bg-alt: hsl(210, 14%, 14%);
+  --color-bg-hover: hsl(210, 12%, 18%);
+
+  /* Borders */
+  --color-border: hsl(210, 12%, 22%);
+  --color-border-strong: hsl(210, 10%, 30%);
+}
+
+/* Dark mode specific overrides */
+[data-theme="dark"] .app-header {
+  background-color: hsl(210, 15%, 8%);
+  border-bottom: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .modal {
+  background-color: hsl(210, 15%, 14%);
+  border-color: var(--color-border-strong);
+}
+
+[data-theme="dark"] .error {
+  background-color: hsl(0, 72%, 15%);
+  border-left-color: var(--color-danger);
+}
+
+/* Dark mode status badges */
+[data-theme="dark"] .status-badge[data-status="todo"] {
+  background-color: hsl(210, 12%, 25%);
+  color: hsl(210, 10%, 70%);
+}
+
+[data-theme="dark"] .status-badge[data-status="in_progress"] {
+  background-color: hsl(45, 50%, 20%);
+  color: hsl(45, 93%, 70%);
+  border-color: hsl(45, 70%, 40%);
+}
+
+[data-theme="dark"] .status-badge[data-status="completed"] {
+  background-color: hsl(145, 40%, 18%);
+  color: hsl(145, 63%, 65%);
+  border-color: hsl(145, 50%, 35%);
+}
+
+/* Dark mode priority badges */
+[data-theme="dark"] .priority-badge[data-priority="low"] {
+  background-color: hsl(145, 40%, 18%);
+  color: hsl(145, 63%, 65%);
+}
+
+[data-theme="dark"] .priority-badge[data-priority="medium"] {
+  background-color: hsl(45, 50%, 20%);
+  color: hsl(45, 93%, 70%);
+}
+
+[data-theme="dark"] .priority-badge[data-priority="high"] {
+  background-color: hsl(0, 50%, 20%);
+  color: hsl(0, 72%, 70%);
+}
+
+/* Dark mode inputs */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background-color: hsl(210, 15%, 14%);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Dark mode modal overlay */
+[data-theme="dark"] .modal-overlay {
+  background-color: hsla(210, 15%, 5%, 0.8);
+}
