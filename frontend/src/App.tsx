@@ -15,11 +15,17 @@ function Protected({ children }: { children: JSX.Element }) {
   return children
 }
 
+function Guest({ children }: { children: JSX.Element }) {
+  const { token } = useAuth()
+  if (token) return <Navigate to="/projects" replace />
+  return children
+}
+
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Guest><Login /></Guest>} />
+      <Route path="/register" element={<Guest><Register /></Guest>} />
       <Route
         path="/projects"
         element={<Protected><Projects /></Protected>}
@@ -37,7 +43,7 @@ export default function App() {
         element={<Protected><Task /></Protected>}
       />
       <Route path="/me" element={<Protected><Profile /></Protected>} />
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<Navigate to="/projects" replace />} />
     </Routes>
   )
 }
