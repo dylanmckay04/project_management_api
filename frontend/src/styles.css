@@ -1,66 +1,529 @@
-:root{--max-width:900px;margin:0}
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.4;padding:20px}
-.container{max-width:900px;margin:0 auto}
-label{display:block;margin-top:10px}
-input{padding:8px;margin-top:4px;width:100%;box-sizing:border-box}
-textarea{padding:8px;margin-top:4px;width:100%;box-sizing:border-box;font-family:inherit}
-select{padding:8px;margin-top:4px;width:100%;box-sizing:border-box;font-family:inherit}
-button{margin-top:12px;padding:8px 12px;cursor:pointer;background-color:#007bff;color:white;border:none;border-radius:4px}
-button:hover{background-color:#0056b3}
-button:disabled{background-color:#6c757d;cursor:not-allowed}
-.error{color:#b00020;margin-top:10px}
+/* ===== CSS Variables - Traffic Light Palette with HSL ===== */
+:root {
+  /* Traffic Light Colors */
+  --color-green: hsl(145, 63%, 42%);
+  --color-green-hover: hsl(145, 63%, 35%);
+  --color-yellow: hsl(45, 93%, 47%);
+  --color-yellow-hover: hsl(45, 93%, 40%);
+  --color-red: hsl(0, 72%, 51%);
+  --color-red-hover: hsl(0, 72%, 43%);
 
-/* Header and actions */
-.header-actions{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.header-actions h1{margin:0}
-.header-actions button{margin:0}
-.actions{display:flex;gap:10px}
+  /* Neutrals */
+  --color-white: hsl(0, 0%, 100%);
+  --color-gray-50: hsl(210, 20%, 98%);
+  --color-gray-100: hsl(210, 15%, 94%);
+  --color-gray-200: hsl(210, 12%, 87%);
+  --color-gray-300: hsl(210, 10%, 75%);
+  --color-gray-400: hsl(210, 8%, 55%);
+  --color-gray-500: hsl(210, 8%, 45%);
+  --color-gray-600: hsl(210, 10%, 35%);
+  --color-gray-700: hsl(210, 12%, 25%);
+  --color-gray-800: hsl(210, 15%, 15%);
+  --color-gray-900: hsl(210, 20%, 10%);
 
-/* Modal */
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
-.modal{background-color:white;padding:30px;border-radius:8px;max-width:500px;width:90%;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
-.modal h2{margin-top:0}
+  /* Semantic */
+  --color-primary: var(--color-green);
+  --color-primary-hover: var(--color-green-hover);
+  --color-warning: var(--color-yellow);
+  --color-warning-hover: var(--color-yellow-hover);
+  --color-danger: var(--color-red);
+  --color-danger-hover: var(--color-red-hover);
 
-/* Form */
-.form{display:flex;flex-direction:column}
-.form-actions{display:flex;gap:10px;margin-top:20px}
-.form-actions button{margin:0}
-.form-actions button:last-child{background-color:#6c757d}
-.form-actions button:last-child:hover{background-color:#5a6268}
+  /* Text */
+  --color-text: var(--color-gray-900);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-inverse: var(--color-white);
 
-/* Delete button */
-.delete-btn{background-color:#dc3545;margin-left:auto}
-.delete-btn:hover{background-color:#c82333}
+  /* Backgrounds */
+  --color-bg: var(--color-white);
+  --color-bg-alt: var(--color-gray-50);
+  --color-bg-hover: var(--color-gray-100);
 
-/* List styles */
-.project-list{list-style:none;padding:0}
-.project-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #ddd}
-.project-item a{color:#007bff;text-decoration:none}
-.project-item a:hover{text-decoration:underline}
+  /* Borders */
+  --color-border: var(--color-gray-200);
+  --color-border-strong: var(--color-gray-300);
 
-/* Task list styles */
-.task-list{list-style:none;padding:0}
-.task-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #ddd}
-.task-item > div{flex:1;display:flex;align-items:center;gap:10px}
-.task-item a{color:#007bff;text-decoration:none}
-.task-item a:hover{text-decoration:underline}
+  /* Layout */
+  --max-width: 900px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+}
 
-/* Status badge */
-.status-badge{padding:4px 8px;border-radius:4px;font-size:0.85em;font-weight:bold;white-space:nowrap}
-.status-badge[data-status="todo"]{background-color:#e2e3e5;color:#383d41}
-.status-badge[data-status="in_progress"]{background-color:#fff3cd;color:#856404}
-.status-badge[data-status="completed"]{background-color:#d4edda;color:#155724}
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* App header */
-.app-header{background:#fafafa;border-bottom:1px solid #eee;padding:10px 0;margin-bottom:20px}
-.header-inner{display:flex;justify-content:space-between;align-items:center}
-.nav-links{display:flex;gap:12px}
-.nav-links a{color:#007bff;text-decoration:none}
-.nav-links a:hover{text-decoration:underline}
-.header-right{display:flex;align-items:center;gap:12px}
-.user-name{color:#333;text-decoration:none;font-weight:600}
-.link-btn{background:transparent;border:none;color:#007bff;cursor:pointer;padding:0}
-.link-btn:hover{color:#e7f2fd}
-.header-spinner{width:16px;height:16px;display:inline-block;margin-right:8px;border-radius:50%;border:2px solid rgba(0,0,0,0.1);border-top-color:#007bff;animation:spin 1s linear infinite}
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  padding: var(--spacing-xl);
+}
 
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/* ===== Container ===== */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ===== Typography ===== */
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-gray-800);
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Form Elements ===== */
+label {
+  display: block;
+  margin-top: var(--spacing-md);
+  font-weight: 500;
+  color: var(--color-gray-700);
+  font-size: 0.875rem;
+}
+
+input, textarea, select {
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-top: var(--spacing-xs);
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-primary);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ===== Buttons ===== */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-inverse);
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+button:disabled {
+  background-color: var(--color-gray-300);
+  color: var(--color-gray-500);
+  cursor: not-allowed;
+}
+
+/* Button variants */
+.btn-secondary {
+  background-color: var(--color-gray-500);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-gray-600);
+}
+
+/* ===== Error Message ===== */
+.error {
+  color: var(--color-danger);
+  font-weight: 500;
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: hsl(0, 72%, 96%);
+  border-left: 3px solid var(--color-danger);
+  border-radius: var(--radius-sm);
+}
+
+/* ===== Header & Actions ===== */
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.header-actions h1 {
+  margin: 0;
+}
+
+.header-actions button {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+/* ===== Modal ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsla(210, 20%, 10%, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--color-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 90%;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 8px 32px hsla(210, 20%, 10%, 0.15);
+}
+
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--color-border);
+}
+
+/* ===== Form Layout ===== */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.form-actions button {
+  margin: 0;
+  flex: 1;
+}
+
+.form-actions button:last-child {
+  background-color: var(--color-gray-500);
+}
+
+.form-actions button:last-child:hover {
+  background-color: var(--color-gray-600);
+}
+
+/* ===== Delete Button ===== */
+.delete-btn {
+  background-color: var(--color-danger);
+  margin-left: auto;
+}
+
+.delete-btn:hover {
+  background-color: var(--color-danger-hover);
+}
+
+/* ===== Project List ===== */
+.project-list {
+  list-style: none;
+}
+
+.project-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  background-color: var(--color-bg-alt);
+}
+
+.project-item:hover {
+  border-color: var(--color-border-strong);
+  background-color: var(--color-bg-hover);
+}
+
+.project-item a {
+  font-weight: 600;
+  font-size: 1.0625rem;
+}
+
+.project-item .delete-btn {
+  margin: 0;
+}
+
+/* ===== Task List ===== */
+.task-list {
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  background-color: var(--color-bg-alt);
+}
+
+.task-item:hover {
+  border-color: var(--color-border-strong);
+  background-color: var(--color-bg-hover);
+}
+
+.task-item > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.task-item a {
+  font-weight: 600;
+}
+
+.task-item .delete-btn {
+  margin: 0;
+}
+
+/* ===== Status Badge - Traffic Light Colors ===== */
+.status-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.status-badge[data-status="todo"] {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-700);
+}
+
+.status-badge[data-status="in_progress"] {
+  background-color: hsl(45, 93%, 85%);
+  color: hsl(45, 80%, 25%);
+  border: 1px solid var(--color-yellow);
+}
+
+.status-badge[data-status="completed"] {
+  background-color: hsl(145, 63%, 90%);
+  color: hsl(145, 63%, 25%);
+  border: 1px solid var(--color-green);
+}
+
+/* ===== Priority Badge ===== */
+.priority-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-badge[data-priority="low"] {
+  background-color: hsl(145, 63%, 90%);
+  color: hsl(145, 63%, 25%);
+}
+
+.priority-badge[data-priority="medium"] {
+  background-color: hsl(45, 93%, 85%);
+  color: hsl(45, 80%, 25%);
+}
+
+.priority-badge[data-priority="high"] {
+  background-color: hsl(0, 72%, 92%);
+  color: hsl(0, 72%, 35%);
+}
+
+/* ===== App Header ===== */
+.app-header {
+  background-color: var(--color-gray-800);
+  padding: var(--spacing-md) 0;
+  margin: calc(-1 * var(--spacing-xl));
+  margin-bottom: var(--spacing-xl);
+  padding-left: var(--spacing-xl);
+  padding-right: var(--spacing-xl);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.nav-links a {
+  color: var(--color-gray-100);
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+.nav-links a:hover {
+  color: var(--color-white);
+  text-decoration: none;
+  background-color: var(--color-gray-700);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.user-name {
+  color: var(--color-gray-100);
+  font-weight: 600;
+}
+
+.user-name:hover {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.link-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-gray-300);
+  cursor: pointer;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin: 0;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.link-btn:hover {
+  color: var(--color-white);
+  background-color: var(--color-gray-700);
+}
+
+/* ===== Loading Spinner ===== */
+.header-spinner {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-right: var(--spacing-sm);
+  border-radius: 50%;
+  border: 2px solid var(--color-gray-600);
+  border-top-color: var(--color-green);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Filter Controls ===== */
+.filter-controls {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-alt);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.filter-controls select {
+  margin: 0;
+  max-width: 200px;
+}
+
+/* ===== Detail Page ===== */
+.detail-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.detail-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.detail-section {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg-alt);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.detail-section h3 {
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-xl) * 2;
+  color: var(--color-text-muted);
+}
+
+.empty-state p {
+  margin-bottom: var(--spacing-lg);
+}
+
