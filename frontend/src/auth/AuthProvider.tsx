@@ -41,11 +41,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: user, isLoading, refetch } = useQuery<User>({
     queryKey: ['me'],
     queryFn: async () => {
-      const resp = await api.get<User>('/users/me')
-      return resp.data
+      try {
+        const resp = await api.get<User>('/users/me')
+        return resp.data
+      } catch (error: any) {
+        // If we get a 401, the token is invalid/expired - clear it
+        if (error?.response?.status === 401) {
+          localStorage.removeItem('pm_token')
+          setToken(null)
+        }
+        throw error
+      }
     },
     enabled: Boolean(token),
     staleTime: 1000 * 60 * 5,
+    retry: false, // Don't retry on auth failures
   })
 
   useEffect(() => {
