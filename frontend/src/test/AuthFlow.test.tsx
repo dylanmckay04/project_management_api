@@ -115,7 +115,7 @@ describe('Auth Flow', () => {
     })
   })
 
-  it('sets authorization header when token is present', async () => {
+  it('sets token in localStorage when login is called', async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
@@ -128,13 +128,12 @@ describe('Auth Flow', () => {
     loginButton.click()
 
     await waitFor(() => {
-      expect(axios.defaults.headers.common['Authorization']).toBe(
-        'Bearer test-token'
-      )
+      // Token should be stored in localStorage (interceptor will read it from there)
+      expect(localStorage.getItem('pm_token')).toBe('test-token')
     })
   })
 
-  it('removes authorization header on logout', async () => {
+  it('removes token from localStorage on logout', async () => {
     localStorage.setItem('pm_token', 'test-token')
 
     render(
@@ -145,16 +144,12 @@ describe('Auth Flow', () => {
       </QueryClientProvider>
     )
 
-    // Mock axios to have the header set
-    axios.defaults.headers.common['Authorization'] = 'Bearer test-token'
-
     const logoutButton = screen.getByRole('button', { name: /logout/i })
     logoutButton.click()
 
     await waitFor(() => {
-      expect(
-        axios.defaults.headers.common['Authorization']
-      ).toBeUndefined()
+      // Token should be removed from localStorage
+      expect(localStorage.getItem('pm_token')).toBeNull()
     })
   })
 

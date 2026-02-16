@@ -31,10 +31,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (token) {
       localStorage.setItem('pm_token', token)
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
     } else {
       localStorage.removeItem('pm_token')
-      delete api.defaults.headers.common['Authorization']
       // clear cached user on logout
       queryClient.removeQueries({ queryKey: ['me'] })
     }

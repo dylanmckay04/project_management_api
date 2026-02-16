@@ -9,7 +9,7 @@ validate_settings()
 app = FastAPI(
     title="Project Management API",
     description="A professional project management API with user authentication",
-    version="1.0.0"
+    version="1.1.0"
 )
 
 app.add_middleware(
@@ -17,7 +17,7 @@ app.add_middleware(
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers={"*"}
+    allow_headers=["*"]
 )
 
 app.include_router(users_router)
