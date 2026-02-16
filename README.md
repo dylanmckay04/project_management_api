@@ -271,7 +271,7 @@ Visit http://localhost:8000/docs (OpenAPI/Swagger UI) or http://localhost:8000/r
 The frontend is deployed on Vercel:
 1. Connect your GitHub repository to Vercel
 2. Vercel automatically detects the React/Vite setup
-3. Set environment variable: `VITE_API_URL=YOUR_API_HOST_URL`
+3. Set environment variable: `VITE_API_URL= https://web-production-8f59b.up.railway.app`
 4. Deployments trigger on push to main branch
 
 **Live URL**: https://pulsepm.vercel.app
