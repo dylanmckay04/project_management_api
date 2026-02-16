@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import ProjectForm from '../components/ProjectForm'
 
 async function fetchProjects() {
-  const resp = await api.get('/projects')
+  const resp = await api.get('/projects/')
   return resp.data
 }
 

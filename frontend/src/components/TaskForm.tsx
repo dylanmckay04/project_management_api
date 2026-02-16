@@ -47,7 +47,7 @@ export default function TaskForm({
         await api.put(`/tasks/${taskId}`, payload)
       } else {
         // Create
-        await api.post('/tasks', payload)
+        await api.post('/tasks/', payload)
       }
       onSuccess()
     } catch (err: any) {

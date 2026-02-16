@@ -8,12 +8,12 @@ import { Project, Task } from '../types'
 
 async function fetchTasks(projectId?: number): Promise<Task[]> {
   const params = projectId ? { project_id: projectId } : {}
-  const resp = await api.get<Task[]>('/tasks', { params })
+  const resp = await api.get<Task[]>('/tasks/', { params })
   return resp.data
 }
 
 async function fetchProjects(): Promise<Project[]> {
-  const resp = await api.get<Project[]>('/projects')
+  const resp = await api.get<Project[]>('/projects/')
   return resp.data
 }
 

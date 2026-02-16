@@ -26,7 +26,7 @@ export default function ProjectForm({ projectId, onSuccess, onCancel, initialDat
         await api.put(`/projects/${projectId}`, { name, description } as Partial<Project>)
       } else {
         // Create
-        await api.post('/projects', { name, description } as Partial<Project>)
+        await api.post('/projects/', { name, description } as Partial<Project>)
       }
       onSuccess()
     } catch (err: any) {
