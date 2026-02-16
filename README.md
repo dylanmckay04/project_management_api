@@ -114,7 +114,7 @@ This project showcases practical experience with enterprise-grade tooling and be
 
 ```bash
 git clone https://github.com/dylanmckay04/pulsepm.git
-cd pulse_pm
+cd pulsepm
 ```
 
 #### 2. Setup Backend
@@ -168,7 +168,7 @@ npm run dev
 ## Project Structure
 
 ```
-pulse_pm/
+pulsepm/
 ├── app/                        # FastAPI backend
 │   ├── api/                    # Route handlers
 │   ├── models/                 # SQLAlchemy ORM models
