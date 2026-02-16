@@ -1,130 +1,102 @@
-# Project Management API
+# Pulse PM - Project Management Application
 
-A REST API for managing projects and tasks, built with FastAPI and PostgreSQL. This API includes modern RESTful design practices and secure authentication.
+A full-stack project management application for planning, organizing, and tracking projects and tasks. Built with FastAPI, React, TypeScript, and PostgreSQL.
 
-**Live Demo:** https://web-production-8f59b.up.railway.app
+**Live Application:** https://pulsepm.vercel.app  
+**Live API:** https://web-production-8f59b.up.railway.app
 
 ---
 
 ## Table of Contents
 
+- [Overview](#overview)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
 - [Getting Started](#getting-started)
-- [API Documentation](#api-documentation)
 - [Project Structure](#project-structure)
-- [Development](#development)
+- [Frontend Development](#frontend-development)
+- [Backend Development](#backend-development)
 - [Deployment](#deployment)
-- [Future Improvements](#future-improvements)
+- [Future Roadmap](#future-roadmap)
+
+---
+
+## Overview
+
+Pulse PM is a portfolio project demonstrating a complete full-stack web application with:
+- **Frontend**: Modern React SPA with TypeScript, deployed on Vercel
+- **Backend**: Production-ready FastAPI REST API, deployed on Railway with PostgreSQL
+- **Authentication**: Secure JWT-based authentication with password hashing
+- **Architecture**: Clean layered design with proper separation of concerns
+
+This project showcases practical experience with enterprise-grade tooling and best practices.
 
 ---
 
 ## Features
 
-### Core Functionality
-- **User Management**: Registration, authentication, profile management
-- **Projects**: Create, read, update, delete projects with ownership-based access control
-- **Tasks**: Manage tasks within projects with status and priority tracking
-- **Soft Deletes**: Preserve data integrity with soft delete (is_active flag)
+### User Management
+- User registration and login with secure authentication
+- JWT token-based session management
+- User profile management
+- Password hashing with bcrypt-compatible algorithms
 
-### Security & Authentication
-- **JWT Bearer Token Authentication**: Secure token-based access
-- **Password Hashing**: bcrypt-compatible pbkdf2_sha256 algorithm
-- **Authorization Checks**: Ownership validation on protected resources
-- **Environment-based Configuration**: Secure secrets management with validation
+### Project Management
+- Create, view, update, and delete projects
+- Ownership-based access control
+- Project descriptions and metadata
+- Organize tasks within projects
+
+### Task Management
+- Create tasks within projects
+- Task status tracking (To Do, In Progress, Completed)
+- Task priority levels (Low, Medium, High)
+- Task assignments and due dates
+- Task descriptions and metadata
+
+### Data Integrity
+- Soft delete functionality for data preservation
+- Audit timestamps (created_at, updated_at)
+- Cascade deletes with proper constraints
+- Foreign key relationships
 
 ### Production-Ready
-- **Live Deployment**: Running on Railway with PostgreSQL
-- **API Documentation**: Auto-generated Swagger UI and ReDoc
-- **Health Checks**: Endpoint monitoring support
-- **Type Safety**: Full Pydantic validation and SQLAlchemy ORM typing
+- Live deployment (Vercel + Railway)
+- Comprehensive API documentation (OpenAPI/Swagger UI, ReDoc)
+- Health check endpoints
+- Type-safe validation with Pydantic
+- Full TypeScript interface definitions
 
 ---
 
 ## Tech Stack
 
+### Frontend
+| Component | Technology | Version |
+|-----------|-----------|---------|
+| **UI Framework** | React | 18.2.0 |
+| **Language** | TypeScript | 5.3.2 |
+| **Build Tool** | Vite | 5.0.0 |
+| **Routing** | React Router | 6.14.1 |
+| **State Management** | TanStack React Query | 5.9.0 |
+| **HTTP Client** | Axios | 1.6.0 |
+| **Testing** | Vitest | 1.0.0 |
+| **Test Library** | React Testing Library | 14.1.0 |
+| **Hosting** | Vercel | - |
+
+### Backend
 | Component | Technology | Version |
 |-----------|-----------|---------|
 | **Framework** | FastAPI | 0.129.0 |
 | **Web Server** | Uvicorn | 0.40.0 |
-| **Database** | PostgreSQL / SQLite | Latest |
+| **Language** | Python | 3.13.9 |
+| **Database** | PostgreSQL | Latest |
 | **ORM** | SQLAlchemy | 2.0.46 |
 | **Validation** | Pydantic | 2.12.5 |
 | **Authentication** | python-jose (JWT) | 3.5.0 |
 | **Password Hashing** | passlib + pbkdf2_sha256 | 1.7.4 |
 | **Testing** | pytest | 9.0.2 |
-| **Language** | Python | 3.13.9 |
-
----
-
-## Architecture
-
-### Layered Design
-
-```
-Request → Route (API Layer) → Schema (Validation) → Model (ORM) → Database
-                    ↓
-            Dependency Injection
-            (Authentication, DB Sessions)
-                    ↓
-            Security/Core Layer
-            (JWT, Password Hashing, Config)
-```
-
-### Directory Structure
-
-```
-project_management_api/
-├── app/
-│   ├── api/                    # Route handlers
-│   │   ├── users.py           # User endpoints
-│   │   ├── projects.py        # Project endpoints
-│   │   ├── tasks.py           # Task endpoints
-│   │   └── __init__.py
-│   ├── models/                 # SQLAlchemy ORM models
-│   │   ├── user.py
-│   │   ├── project.py
-│   │   ├── task.py
-│   │   └── __init__.py
-│   ├── schemas/                # Pydantic validation schemas
-│   │   ├── user.py
-│   │   ├── project.py
-│   │   ├── task.py
-│   │   └── __init__.py
-│   ├── core/                   # Core utilities
-│   │   ├── config.py          # Settings & environment management
-│   │   ├── security.py        # JWT & password hashing
-│   │   ├── dependencies.py    # Dependency injection
-│   │   └── __init__.py
-│   ├── database.py            # Database connection & session management
-│   └── main.py                # FastAPI app initialization
-├── tests/
-│   └── test_api.py            # Integration tests
-├── conftest.py                # Pytest configuration
-├── requirements.txt           # Python dependencies
-├── Procfile                   # Railway deployment config
-├── runtime.txt                # Python version
-├── .env                       # Environment variables (not in Git)
-├── .gitignore
-└── README.md
-```
-
-### Data Model
-
-```
-User (1) ──< (Many) Project
-  │
-  └──< (Many) Task (assigned_to)
-
-Project (1) ──< (Many) Task
-```
-
-**Key Relationships:**
-- Users own Projects (cascade delete)
-- Projects contain Tasks (cascade delete)
-- Tasks can be assigned to Users
-- Soft deletes preserve historical data
+| **Hosting** | Railway | - |
 
 ---
 
@@ -132,414 +104,307 @@ Project (1) ──< (Many) Task
 
 ### Prerequisites
 
-- Python 3.13.9+
-- PostgreSQL (for production) or SQLite (for development)
-- Git
+- **For Full Stack**: Git, Node.js 16+, Python 3.13.9+
+- **Backend Only**: Python 3.13.9+, PostgreSQL or SQLite
+- **Frontend Only**: Node.js 16+
 
-### Local Development Setup
+### Full System Setup
 
 #### 1. Clone Repository
 
 ```bash
-git clone https://github.com/dylanmckay04/project_management_api.git
-cd project_management_api
+git clone https://github.com/dylanmckay04/pulsepm.git
+cd pulse_pm
 ```
 
-#### 2. Create Virtual Environment
+#### 2. Setup Backend
 
 ```bash
+cd app
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-```
-
-#### 3. Install Dependencies
-
-```bash
+cd ..
 pip install -r requirements.txt
 ```
 
-#### 4. Create `.env` File
-
-Add to `.env`:
+Create `.env` file in project root:
 ```
 DATABASE_URL=sqlite:///./test.db
-SECRET_KEY=your-super-secret-key-change-in-production
+SECRET_KEY=your-super-secret-key-here
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-**For PostgreSQL (Production):**
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/project_management
-```
-
-#### 5. Run the API
+#### 3. Setup Frontend
 
 ```bash
-uvicorn app.main:app --reload
+cd frontend
+npm install
 ```
 
-Server runs on: `http://localhost:8000`
+#### 4. Run Both Services
 
-#### 6. Access Documentation
+**Terminal 1 - Backend:**
+```bash
+uvicorn app.main:app --reload
+# Runs on http://localhost:8000
+```
 
-- **Swagger UI**: http://localhost:8000/docs
+**Terminal 2 - Frontend:**
+```bash
+cd frontend
+npm run dev
+# Runs on http://localhost:3000
+```
+
+#### 5. Access the Application
+
+- **Frontend**: http://localhost:3000
+- **API Docs**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 
 ---
 
-## API Documentation
+## Project Structure
 
-### Base URL
-
-**Production**: `https://web-production-8f59b.up.railway.app`
-
-**Local**: `http://localhost:8000`
-
-### Authentication
-
-All protected endpoints require a Bearer token:
-
-```bash
-curl -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  https://web-production-8f59b.up.railway.app/users/me
 ```
+pulse_pm/
+├── app/                        # FastAPI backend
+│   ├── api/                    # Route handlers
+│   ├── models/                 # SQLAlchemy ORM models
+│   ├── schemas/                # Pydantic validation
+│   ├── core/                   # Config, security, dependencies
+│   ├── database.py             # Database setup
+│   └── main.py                 # FastAPI app
+├── frontend/                   # React TypeScript frontend
+│   ├── src/
+│   │   ├── api/                # Axios configuration
+│   │   ├── auth/               # Authentication context
+│   │   ├── components/         # Reusable components
+│   │   ├── pages/              # Page components
+│   │   ├── test/               # Test files
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   ├── package.json
+│   └── vite.config.ts
+├── tests/                      # Backend integration tests
+├── alembic/                    # Database migrations
+├── requirements.txt            # Python dependencies
+├── README.md                   # This file
+└── Dockerfile*                 # Docker configuration
 
-### User Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---|
-| POST | `/users/register` | Register new user | ❌ |
-| POST | `/users/login` | Login (returns JWT token) | ❌ |
-| GET | `/users/me` | Get current user profile | ✅ |
-| GET | `/users/{user_id}` | Get user by ID | ✅ |
-| PUT | `/users/{user_id}` | Update user profile | ✅ |
-| DELETE | `/users/me` | Soft delete current user | ✅ |
-
-**Example: Register**
-
-```bash
-curl -X POST "https://web-production-8f59b.up.railway.app/users/register" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "user@example.com",
-    "full_name": "John Doe",
-    "password": "SecurePassword123"
-  }'
+See [Backend README](./app/README.md) for backend-specific architecture details.
 ```
-
-**Example: Login**
-
-```bash
-curl -X POST "https://web-production-8f59b.up.railway.app/users/login?email=user@example.com&password=SecurePassword123"
-```
-
-Response:
-```json
-{
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "token_type": "bearer"
-}
-```
-
-### Project Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---|
-| POST | `/projects/` | Create project | ✅ |
-| GET | `/projects/` | List user's projects | ✅ |
-| GET | `/projects/{project_id}` | Get project details | ✅ |
-| PUT | `/projects/{project_id}` | Update project | ✅ |
-| DELETE | `/projects/{project_id}` | Delete project | ✅ |
-
-**Example: Create Project**
-
-```bash
-curl -X POST "https://web-production-8f59b.up.railway.app/projects/" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Website Redesign",
-    "description": "Redesign company website"
-  }'
-```
-
-### Task Endpoints
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---|
-| POST | `/tasks/` | Create task | ✅ |
-| GET | `/tasks/` | List tasks (filterable) | ✅ |
-| GET | `/tasks/{task_id}` | Get task details | ✅ |
-| PUT | `/tasks/{task_id}` | Update task | ✅ |
-| DELETE | `/tasks/{task_id}` | Delete task | ✅ |
-
-**Example: Create Task**
-
-```bash
-curl -X POST "https://web-production-8f59b.up.railway.app/tasks/" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Design homepage",
-    "description": "Create mockups for homepage",
-    "project_id": 1,
-    "priority": "high",
-    "status": "todo"
-  }'
-```
-
-**Example: List Tasks with Filters**
-
-```bash
-# Filter by project
-curl "https://web-production-8f59b.up.railway.app/tasks/?project_id=1" \
-  -H "Authorization: Bearer YOUR_TOKEN"
-
-# Filter by status
-curl "https://web-production-8f59b.up.railway.app/tasks/?status=in_progress" \
-  -H "Authorization: Bearer YOUR_TOKEN"
-```
-
-### Full Interactive Documentation
-
-Visit https://web-production-8f59b.up.railway.app/docs to test all endpoints interactively with Swagger UI.
 
 ---
 
-## Project Structure Details
+## Frontend Development
 
-### Models (`app/models/`)
+### Running the Frontend
 
-**User Model**
-- Email (unique, indexed)
-- Full name
-- Password hash (never exposed)
-- is_active flag (soft delete)
-- Relationships: owns Projects, assigned Tasks
+```bash
+cd frontend
+npm run dev
+```
 
-**Project Model**
-- Name, description
-- owner_id (FK to User)
-- Cascade delete tasks when project deleted
-- Timestamps: created_at, updated_at
+### Building for Production
 
-**Task Model**
-- Title, description
-- Status enum: TODO, IN_PROGRESS, COMPLETED
-- Priority enum: LOW, MEDIUM, HIGH
-- project_id (FK to Project)
-- assigned_to (optional FK to User)
-- Timestamps: created_at, updated_at
+```bash
+npm run build   # Creates optimized build
+npm run preview # Preview production build
+```
 
-### Schemas (`app/schemas/`)
+### Testing
 
-Pydantic models for validation and serialization:
-- **Create schemas**: Input validation (request bodies)
-- **Update schemas**: Optional fields for partial updates
-- **Read schemas**: Output models (never expose password_hash)
-- **Detailed schemas**: Include related data (nested objects)
+```bash
+npm run test       # Run all tests
+npm run test:ui    # Run tests in UI mode
+```
 
-### Routes (`app/api/`)
+### Project Structure
 
-FastAPI APIRouter instances:
-- Dependency injection for authentication
-- Ownership checks for authorization
-- Proper HTTP status codes (201 for creation, 204 for deletion)
-- Error handling with meaningful messages
+- **`src/pages/`**: Main page components (Login, Projects, Tasks, etc.)
+- **`src/components/`**: Reusable UI components
+- **`src/auth/`**: Authentication context provider
+- **`src/api/`**: Axios client configuration
+- **`src/types.ts`**: TypeScript interfaces
 
-### Core (`app/core/`)
+### Frontend Features
 
-**config.py**
-- Environment variable management
-- Pydantic Settings with validation
-- Production detection and startup checks
-- Secure handling of secrets (SecretStr)
-
-**security.py**
-- Password hashing and verification
-- JWT token creation and validation
-- Token expiration handling
-
-**dependencies.py**
-- FastAPI dependency injection functions
-- Authentication flow (extract token → validate → fetch user)
-- Request-scoped database sessions
-
-### Database (`app/database.py`)
-
-- SQLAlchemy engine initialization
-- Session management
-- Base model for all ORM models
-- get_db() dependency for injecting DB sessions
+- JWT token-based authentication
+- Protected routes via AuthProvider
+- React Query for server state management
+- React Router for navigation
+- Vitest for unit and integration tests
+- TypeScript for type safety
 
 ---
 
-## Testing
+## Backend Development
 
-### Run Tests
+For detailed backend documentation, see [Backend README](./app/README.md).
 
-```bash
-pytest -q
-```
-
-### Test Structure
-
-Current test (`tests/test_api.py`):
-- Full flow integration test
-- Covers: registration → login → create project → create task
-- Verifies JWT authentication works end-to-end
-
-### Expand Tests
+### Quick Start
 
 ```bash
-# Run with verbose output
-pytest -v
-
-# Run specific test
-pytest tests/test_api.py::test_full_flow -v
-
-# Run with coverage
-pytest --cov=app tests/
+pip install -r requirements.txt
+uvicorn app.main:app --reload
 ```
+
+### API Endpoints
+
+- **Users**: `/users/register`, `/users/login`, `/users/me`
+- **Projects**: `/projects/` (CRUD operations)
+- **Tasks**: `/tasks/` (CRUD operations)
+- **Health**: `/health`
+
+### Interactive Documentation
+
+Visit http://localhost:8000/docs (OpenAPI/Swagger UI) or http://localhost:8000/redoc for full API documentation.
 
 ---
 
 ## Deployment
 
-### Live Deployment (Railway)
+### Frontend - Vercel
 
-This API is deployed on **Railway** with:
-- **Web Service**: Running FastAPI with Uvicorn
-- **PostgreSQL Database**: Persistently stored data
-- **Auto-deploy**: Updates trigger on GitHub push
-- **Logs**: Available in Railway dashboard
+The frontend is deployed on Vercel:
+1. Connect your GitHub repository to Vercel
+2. Vercel automatically detects the React/Vite setup
+3. Set environment variable: `VITE_API_URL=https://web-production-8f59b.up.railway.app`
+4. Deployments trigger on push to main branch
 
-**URL**: https://web-production-8f59b.up.railway.app
+**Live URL**: https://pulse-pm.vercel.app
 
-## Security Considerations
+### Backend - Railway
 
-### Implemented
+The backend is deployed on Railway with PostgreSQL:
+1. Connect GitHub repository
+2. Railway detects `Procfile` and `runtime.txt`
+3. Release command runs Alembic migrations
+4. Production environment variables configured in Railway dashboard
+5. Deployments trigger on push to main branch
 
-- Password hashing with pbkdf2_sha256
-- JWT token-based authentication
-- Bearer token extraction and validation
-- Ownership-based authorization
-- Secure config management (SecretStr for secrets)
-- Environment variable validation at startup
-- HTTP status codes indicate auth failures (401, 403)
+**Live URL**: https://web-production-8f59b.up.railway.app
 
-## Database Schema
+### Environment Variables
 
-### Users Table
+**Railway (Production Backend)**
+- `DATABASE_URL`: PostgreSQL connection string
+- `SECRET_KEY`: Strong secret for JWT signing
+- `ALGORITHM`: HS256
+- `ACCESS_TOKEN_EXPIRE_MINUTES`: 30
 
-```sql
-CREATE TABLE users (
-  id INTEGER PRIMARY KEY,
-  email VARCHAR UNIQUE NOT NULL,
-  full_name VARCHAR NOT NULL,
-  password_hash VARCHAR NOT NULL,
-  is_active BOOLEAN DEFAULT TRUE,
-  created_at DATETIME,
-  updated_at DATETIME
-);
+**Vercel (Production Frontend)**
+- `VITE_API_URL`: Backend API base URL
+
+---
+
+## Testing
+
+### Backend Testing
+
+```bash
+pytest -v                          # Run all tests with verbose output
+pytest tests/test_api.py -v       # Run specific test file
+pytest --cov=app tests/           # Run with coverage report
 ```
 
-### Projects Table
+### Frontend Testing
 
-```sql
-CREATE TABLE projects (
-  id INTEGER PRIMARY KEY,
-  name VARCHAR NOT NULL,
-  description TEXT,
-  owner_id INTEGER FOREIGN KEY REFERENCES users(id),
-  created_at DATETIME,
-  updated_at DATETIME
-);
-```
-
-### Tasks Table
-
-```sql
-CREATE TABLE tasks (
-  id INTEGER PRIMARY KEY,
-  title VARCHAR NOT NULL,
-  description TEXT,
-  project_id INTEGER FOREIGN KEY REFERENCES projects(id),
-  assigned_to INTEGER FOREIGN KEY REFERENCES users(id),
-  status ENUM (todo, in_progress, completed),
-  priority ENUM (low, medium, high),
-  due_date DATETIME,
-  created_at DATETIME,
-  updated_at DATETIME
-);
+```bash
+npm run test                # Run all tests
+npm run test:ui             # Interactive test UI
 ```
 
 ---
 
-## Performance & Scaling
+## Performance & Monitoring
 
-### Current Performance
+### Backend Performance
+- FastAPI async endpoints handle concurrent requests efficiently
+- PostgreSQL with indexed queries for fast lookups
+- Railway auto-scaling for load distribution
+- Response times typically <100ms
 
-- **Response Time**: <100ms for most endpoints (Railway + PostgreSQL)
-- **Concurrent Users**: Hundreds (Uvicorn + async FastAPI)
-- **Database**: PostgreSQL handles typical workloads
-
-### Scaling Strategies
-
-- **Horizontal**: Multiple Railway replicas
-- **Database**: PostgreSQL read replicas
-- **API Gateway**: Cloudflare or similar for rate limiting/DDoS
-- **Monitoring**: New Relic, DataDog for observability
+### Frontend Performance  
+- Vite for fast builds
+- React Query for efficient caching and synchronization
+- Vercel edge network for fast global delivery
+- TypeScript prevents runtime errors
 
 ---
 
-## Future Improvements
+## Security
 
-### High Priority
+### Authentication
+- JWT Bearer tokens with configurable expiration
+- bcrypt-compatible password hashing
+- Secure token storage in browser (localStorage with HTTPS)
 
-- [ ] **Refresh Tokens**: Implement token refresh for better UX
-- [ ] **Pagination**: Add limit/offset for list endpoints
-- [ ] **Search**: Full-text search on projects/tasks
-- [ ] **Filtering**: Advanced filtering (date ranges, multiple statuses)
-- [ ] **More Tests**: Edge cases, error scenarios, auth failures
+### Authorization
+- Ownership-based access control (users own projects)
+- Protected routes on frontend
+- Authorization checks on all backend API endpoints
 
-### Medium Priority
+### Production Security
+- HTTPS enforced on Railway and Vercel
+- Environment-based secret management
+- CORS properly configured
+- Type-safe validation with Pydantic and TypeScript
 
-- [ ] **Alembic Migrations**: Database schema versioning
-- [ ] **GitHub Actions CI/CD**: Auto-run tests on push
-- [ ] **Docker**: Containerize for consistent deployments
-- [ ] **Frontend**: React/Vue app consuming this API
-- [ ] **Rate Limiting**: Prevent abuse
+---
 
-### Nice to Have
+## Future Roadmap
 
-- [ ] **Comments**: Add comments to tasks
-- [ ] **Labels/Tags**: Categorize projects/tasks
-- [ ] **User Roles**: Admin, team lead, member roles
-- [ ] **Webhooks**: Notify external services on events
-- [ ] **Export**: CSV/JSON export of projects/tasks
-- [ ] **API Versioning**: Support `/v2/` routes for backward compatibility
+### Phase 2 - Collaboration
+- [ ] Project collaborators and permissions
+- [ ] Shared team workspaces
+- [ ] User roles (admin, member, viewer)
+- [ ] Activity logs and audit trails
+
+### Phase 3 - Advanced Features
+- [ ] Task comments and discussions
+- [ ] File attachments to tasks
+- [ ] Recurring tasks
+- [ ] Custom task fields
+- [ ] Kanban board view
+
+### Phase 4 - Integration & Notifications
+- [ ] Email notifications for task assignments
+- [ ] Webhook support
+- [ ] Third-party integrations (Slack, GitHub)
+- [ ] Task reminders
+
+### Phase 5 - Analytics & Reporting
+- [ ] Project analytics dashboard
+- [ ] Task completion metrics
+- [ ] Team productivity Reports
+- [ ] Data export (CSV, JSON)
+
+---
+
+## Learning Resources
+
+This project demonstrates:
+- **FastAPI**: Modern Python web framework with async support
+- **React**: Component-based UI with hooks
+- **TypeScript**: Type-safe JavaScript development
+- **PostgreSQL**: Production-grade relational database
+- **JWT Authentication**: Stateless session management
+- **Deployment**: Cloud-native hosting on Vercel and Railway
+- **Full-Stack Development**: End-to-end feature development
 
 ---
 
 ## License
 
-This project is part of a portfolio and can be used as a reference for learning FastAPI, Python, and modern API development practices.
+This project is part of a portfolio and is available for reference.
 
 ---
 
-## Author
+## Contact
 
-Built as a portfolio project by Dylan McKay, demonstrating full-stack API development with modern technologies.
+Built by Dylan McKay as a portfolio demonstration of full-stack web development capabilities.
 
----
-
-## Support
-
-For issues or questions:
-1. Check existing GitHub issues
-2. Review API documentation at `/docs`
-3. Check application logs in Railway dashboard
-
----
+**GitHub Profile**: https://github.com/dylanmckay04/
