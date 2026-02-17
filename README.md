@@ -384,19 +384,6 @@ npm run test:ui             # Interactive test UI
 
 ---
 
-## Learning Resources
-
-This project demonstrates:
-- **FastAPI**: Modern Python web framework with async support
-- **React**: Component-based UI with hooks
-- **TypeScript**: Type-safe JavaScript development
-- **PostgreSQL**: Production-grade relational database
-- **JWT Authentication**: Stateless session management
-- **Deployment**: Cloud-native hosting on Vercel and Railway
-- **Full-Stack Development**: End-to-end feature development
-
----
-
 ## License
 
 This project is part of a portfolio and is available for reference.
