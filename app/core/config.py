@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings
 from pydantic import SecretStr, AnyUrl, ConfigDict
 from functools import lru_cache
+from typing import List
 
 class Settings(BaseSettings):
     app_name: str = "Project Management API"
@@ -34,7 +35,8 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     return Settings()
 
-def validate_settings() -> None:
+def validate_settings() -> List[str]:
+    """Validates environment settings and returns list of CORS origins"""
     settings = get_settings()
     
     if settings.is_production:
@@ -43,3 +45,9 @@ def validate_settings() -> None:
             raise ValueError(
                 "Production detected but using SQLite. Set DATABASE_URL to a production database."
             )
+        origins = ["https://pulsepm.vercel.app"]
+    else:
+        origins = ["*"]
+    
+    return origins
+

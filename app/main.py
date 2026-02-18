@@ -4,7 +4,7 @@ from app.api import users_router, projects_router, tasks_router
 from app.database import Base, engine
 from app.core.config import validate_settings
 
-validate_settings()
+origins = validate_settings()
 
 app = FastAPI(
     title="Project Management API",
@@ -14,7 +14,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
