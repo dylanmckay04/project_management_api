@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings
 from pydantic import SecretStr, AnyUrl, ConfigDict
 from functools import lru_cache
 from typing import List
+from os import getenv
 
 class Settings(BaseSettings):
     app_name: str = "Project Management API"
@@ -13,7 +14,7 @@ class Settings(BaseSettings):
     database_url: AnyUrl = "sqlite:///./test.db"
 
     # Security
-    secret_key: SecretStr = SecretStr("your-super-secret-key-change-in-production")
+    secret_key: SecretStr = SecretStr(getenv("SECRET_KEY"))
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
 
